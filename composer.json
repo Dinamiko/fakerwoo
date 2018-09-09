@@ -1,0 +1,10 @@
+{
+    "name": "fakerwoo",
+    "description": "Create fake WooCommerce orders",
+    "type": "wordpress-plugin",
+    "autoload": {
+        "psr-4": {
+            "FakerWoo\\": "src/"
+        }
+    }
+}
