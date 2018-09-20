@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import OrdersForm from './OrdersForm';
 
 class App extends Component {
 
@@ -6,6 +7,7 @@ class App extends Component {
         return(
             <div className="wrap">
                 <h1>FakerWoo</h1>
+                <OrdersForm/>
             </div>
         );
     }
