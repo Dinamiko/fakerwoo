@@ -1,11 +1,16 @@
 import React from 'react';
 import {mount} from 'enzyme';
 import OrdersForm from '../../components/OrdersForm';
+import Root from '../../Root';
 
 let container;
 
 beforeEach(() => {
-    container = mount(<OrdersForm/>);
+    container = mount(
+        <Root>
+            <OrdersForm/>
+        </Root>
+    );
 });
 
 afterEach(() => {
@@ -17,14 +22,12 @@ test('form element', () => {
 });
 
 test('order quantity field', () => {
-    expect(container.find('#order-quantity').length).toEqual(1);
-
     container.find('#order-quantity').simulate('change', {
         target: {
-            value: 20
+            value: 42
         }
     });
     container.update();
 
-    expect(container.find('#order-quantity').prop('value')).toEqual(20);
+    expect(container.find('#order-quantity').prop('value')).toEqual(42);
 });

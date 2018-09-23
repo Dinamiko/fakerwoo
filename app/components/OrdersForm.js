@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import * as actions from '../actions';
 
 class OrdersForm extends Component {
 
     state = {
-      orderQuantity: 10
+        orderQuantity: 10,
+        order: {}
     };
 
     handleOrderQuantity = (event) => {
@@ -13,12 +16,14 @@ class OrdersForm extends Component {
     handleFormSubmit = (event) => {
         event.preventDefault();
 
+        this.props.createOrder(this.state.order);
+
         // call action creator
         // generate orders
     };
 
     render() {
-        return(
+        return (
             <form onSubmit={this.handleFormSubmit}>
                 <table className="form-table">
                     <tbody>
@@ -44,4 +49,4 @@ class OrdersForm extends Component {
     }
 }
 
-export default OrdersForm;
+export default connect(null, actions)(OrdersForm);
