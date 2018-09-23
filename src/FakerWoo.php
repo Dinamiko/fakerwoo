@@ -66,7 +66,7 @@ class FakerWoo
 				true
 			);
 
-			wp_localize_script('FakerWoo', 'fakerwooLocalizedData', array(
+			wp_localize_script('FakerWoo', 'FakerWooLocalizedData', array(
 				'root' => esc_url_raw(rest_url()),
 				'nonce' => wp_create_nonce('wp_rest')
 			));
