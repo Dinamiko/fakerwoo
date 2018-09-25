@@ -3,7 +3,7 @@
  * Plugin Name: FakerWoo
  */
 
-namespace FakerWoo;
+namespace Dinamiko\FakerWoo;
 
 if (!defined('ABSPATH')) {
     exit;
