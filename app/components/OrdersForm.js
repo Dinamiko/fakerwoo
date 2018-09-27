@@ -15,9 +15,7 @@ class OrdersForm extends Component {
 
     handleFormSubmit = (event) => {
         event.preventDefault();
-
-        // call action creator
-        // generate orders
+        this.props.createOrder();
     };
 
     render() {
