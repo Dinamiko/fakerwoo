@@ -4,31 +4,31 @@ import * as actions from '../actions';
 
 class Header extends Component {
 
-    state = {
-        orders: 0
-    };
+	state = {
+		orders: 0
+	};
 
-    componentDidMount() {
-        this.props.fetchOrders();
-    }
+	componentDidMount() {
+		this.props.fetchOrders();
+	}
 
-    totalOrders() {
-        return this.props.orders.length;
-    }
+	totalOrders() {
+		return this.props.orders.length;
+	}
 
-    render() {
-        return(
-            <div>
-                Orders: {this.totalOrders()}
-            </div>
-        );
-    }
+	render() {
+		return (
+			<div id="total-orders">
+				Orders: {this.totalOrders()}
+			</div>
+		);
+	}
 }
 
 function mapStateToProps(state) {
-    return {
-        orders: state.orders
-    }
+	return {
+		orders: state.orders
+	}
 }
 
 export default connect(mapStateToProps, actions)(Header);

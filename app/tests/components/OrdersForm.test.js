@@ -1,33 +1,33 @@
 import React from 'react';
 import {mount} from 'enzyme';
-import OrdersForm from '../../components/OrdersForm';
 import Root from '../../Root';
+import OrdersForm from '../../components/OrdersForm';
 
-let container;
+let component;
 
 beforeEach(() => {
-    container = mount(
-        <Root>
-            <OrdersForm/>
-        </Root>
-    );
+	component = mount(
+		<Root>
+			<OrdersForm/>
+		</Root>
+	);
 });
 
 afterEach(() => {
-    container.unmount();
+	component.unmount();
 });
 
 test('form element', () => {
-    expect(container.find('form').length).toEqual(1);
+	expect(component.find('form').length).toEqual(1);
 });
 
 test('order quantity field', () => {
-    container.find('#order-quantity').simulate('change', {
-        target: {
-            value: 42
-        }
-    });
-    container.update();
+	component.find('#order-quantity').simulate('change', {
+		target: {
+			value: 42
+		}
+	});
+	component.update();
 
-    expect(container.find('#order-quantity').prop('value')).toEqual(42);
+	expect(component.find('#order-quantity').prop('value')).toEqual(42);
 });

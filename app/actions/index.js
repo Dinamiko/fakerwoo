@@ -1,5 +1,6 @@
 import {FETCH_ORDERS, CREATE_ORDER} from "./types";
 import axios from 'axios';
+
 axios.defaults.headers.common['X-WP-Nonce'] = FakerWooLocalizedData.nonce;
 
 /**

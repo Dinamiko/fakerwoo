@@ -21,20 +21,6 @@ class Orders extends \WP_REST_Controller
     protected $post_type = 'shop_order';
 
     /**
-     * If object is hierarchical.
-     *
-     * @var bool
-     */
-    protected $hierarchical = true;
-
-    /**
-     * Stores the request.
-     *
-     * @var array
-     */
-    protected $request = [];
-
-    /**
      * Register routes.
      *
      * @return void
@@ -80,6 +66,10 @@ class Orders extends \WP_REST_Controller
         );
     }
 
+    /**
+     * Get all order IDs.
+     * @return \WP_REST_Response
+     */
     public function getItems()
     {
         global $wpdb;

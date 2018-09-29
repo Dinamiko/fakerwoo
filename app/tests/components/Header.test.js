@@ -1,8 +1,8 @@
 import React from 'react';
 import {mount} from 'enzyme';
-import Header from '../../components/Header';
-import Root from '../../Root';
 import moxios from 'moxios';
+import Root from '../../Root';
+import Header from '../../components/Header';
 
 beforeEach(() => {
 	moxios.install();
