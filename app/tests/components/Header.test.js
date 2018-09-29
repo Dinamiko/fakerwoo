@@ -6,7 +6,7 @@ import moxios from 'moxios';
 
 beforeEach(() => {
 	moxios.install();
-	moxios.stubRequest(`${FakerWooLocalizedData.root}wc/v2/orders`, {
+	moxios.stubRequest(`${FakerWooLocalizedData.root}fakerwoo/v1/orders`, {
 		status: 200,
 		response: [
 			{id: 1},

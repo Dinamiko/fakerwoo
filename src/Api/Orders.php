@@ -42,9 +42,17 @@ class Orders extends \WP_REST_Controller
     public function register_routes()
     {
 
+        register_rest_route($this->namespace, '/' . $this->rest_base, [
+            [
+                'methods' => \WP_REST_Server::READABLE,
+                'callback' => [$this, 'getItems'],
+                'permission_callback' => [$this, 'update_item_permissions_check'],
+            ],
+        ]);
+
         register_rest_route(
             $this->namespace,
-            '/'.$this->rest_base.'/(?P<id>[\d]+)',
+            '/' . $this->rest_base . '/(?P<id>[\d]+)',
             [
                 'args' => [
                     'id' => [
@@ -70,6 +78,15 @@ class Orders extends \WP_REST_Controller
                 ],
             ]
         );
+    }
+
+    public function getItems()
+    {
+        global $wpdb;
+        $select = "select ID from {$wpdb->posts} where post_type = '{$this->post_type}'";
+        $query = $wpdb->get_results($select);
+
+        return new \WP_REST_Response($query, 200);
     }
 
     /**
@@ -104,11 +121,11 @@ class Orders extends \WP_REST_Controller
             ['%d']
         );
 
-        if ( $update ) {
-            return new \WP_REST_Response( true, 200 );
+        if ($update) {
+            return new \WP_REST_Response(true, 200);
         }
 
-        return new \WP_REST_Response( false, 200 );
+        return new \WP_REST_Response(false, 200);
     }
 
     /**

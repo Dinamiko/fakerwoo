@@ -3,6 +3,7 @@ import {FETCH_ORDERS, CREATE_ORDER} from "../actions/types";
 export default function(state = [], action) {
     switch (action.type){
         case FETCH_ORDERS:
+        	console.log(action.payload.data);
 			const orders = action.payload.data.map(order => order.id);
 			return [...state, ...orders];
         case CREATE_ORDER:

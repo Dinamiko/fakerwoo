@@ -5,8 +5,7 @@ import * as actions from '../actions';
 class OrdersForm extends Component {
 
     state = {
-        orderQuantity: 10,
-        order: {}
+        orderQuantity: 10
     };
 
     handleOrderQuantity = (event) => {
@@ -15,7 +14,9 @@ class OrdersForm extends Component {
 
     handleFormSubmit = (event) => {
         event.preventDefault();
-        this.props.createOrder();
+        for(let i=0; i<this.state.orderQuantity; i++) {
+			this.props.createOrder();
+        }
     };
 
     render() {

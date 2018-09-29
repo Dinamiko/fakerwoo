@@ -8,22 +8,21 @@ axios.defaults.headers.common['X-WP-Nonce'] = FakerWooLocalizedData.nonce;
  */
 export function fetchOrders() {
 
-    const response = axios.get(`${FakerWooLocalizedData.root}wc/v2/orders`);
+	const response = axios.get(`${FakerWooLocalizedData.root}fakerwoo/v1/orders`);
 
-    return {
-        type: FETCH_ORDERS,
-        payload: response
-    };
+	return {
+		type: FETCH_ORDERS,
+		payload: response
+	};
 }
 
 /**
- * Creates an Order.
+ * Creates an order.
  * @param data
  * @returns {{type: string, payload: AxiosPromise<any>}}
  */
-export function createOrder(data)
-{
-	const response = axios.post( `${FakerWooLocalizedData.root}wc/v2/orders`, data );
+export function createOrder(data) {
+	const response = axios.post(`${FakerWooLocalizedData.root}wc/v2/orders`, data);
 
 	return {
 		type: CREATE_ORDER,
