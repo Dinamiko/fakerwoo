@@ -5,8 +5,19 @@ import * as actions from '../actions';
 class OrdersForm extends Component {
 
 	state = {
-		orderQuantity: 10
+		orderQuantity: 1,
+		addresses: {}
 	};
+
+	componentDidMount() {
+		this.props.fetchAddresses();
+	}
+
+	componentDidUpdate() {
+		if(this.state.addresses && this.state.addresses != this.props.addresses) {
+			this.setState({addresses: this.props.addresses});
+		}
+	}
 
 	handleOrderQuantity = (event) => {
 		this.setState({orderQuantity: event.target.value});
@@ -14,8 +25,10 @@ class OrdersForm extends Component {
 
 	handleFormSubmit = (event) => {
 		event.preventDefault();
+
 		for (let i = 0; i < this.state.orderQuantity; i++) {
-			this.props.createOrder();
+			console.log(this.state.addresses[Math.floor(Math.random() * this.state.addresses.length)]);
+			// this.props.createOrder();
 		}
 	};
 
@@ -46,4 +59,10 @@ class OrdersForm extends Component {
 	}
 }
 
-export default connect(null, actions)(OrdersForm);
+function mapStateToProps(state) {
+	return {
+		addresses: state.addresses
+	}
+}
+
+export default connect(mapStateToProps, actions)(OrdersForm);

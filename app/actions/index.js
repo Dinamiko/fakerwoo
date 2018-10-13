@@ -1,4 +1,4 @@
-import {FETCH_ORDERS, CREATE_ORDER} from "./types";
+import {FETCH_ORDERS, CREATE_ORDER, FETCH_ADDRESSES} from "./types";
 import axios from 'axios';
 
 axios.defaults.headers.common['X-WP-Nonce'] = FakerWooLocalizedData.nonce;
@@ -8,7 +8,6 @@ axios.defaults.headers.common['X-WP-Nonce'] = FakerWooLocalizedData.nonce;
  * @returns {{type: string, payload: AxiosPromise<any>}}
  */
 export function fetchOrders() {
-
 	const response = axios.get(`${FakerWooLocalizedData.root}fakerwoo/v1/orders`);
 
 	return {
@@ -27,6 +26,19 @@ export function createOrder(data) {
 
 	return {
 		type: CREATE_ORDER,
+		payload: response
+	};
+}
+
+/**
+ * Fetch a list of addresses.
+ * @returns {{type: string, payload: AxiosPromise<any>}}
+ */
+export function fetchAddresses() {
+	const response = axios.get(`${FakerWooLocalizedData.data}/addresses-us-all.min.json`);
+
+	return {
+		type: FETCH_ADDRESSES,
 		payload: response
 	};
 }

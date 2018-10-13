@@ -76,7 +76,8 @@ class FakerWoo
 
             wp_localize_script('FakerWoo', 'FakerWooLocalizedData', array(
                 'root' => esc_url_raw(rest_url()),
-                'nonce' => wp_create_nonce('wp_rest')
+                'nonce' => wp_create_nonce('wp_rest'),
+                'data' => esc_url_raw(plugins_url().'/fakerwoo/app/data')
             ));
         }
     }
