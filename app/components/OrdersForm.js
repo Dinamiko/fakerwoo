@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions';
+import faker from 'faker';
 
 class OrdersForm extends Component {
 
@@ -14,7 +15,7 @@ class OrdersForm extends Component {
 	}
 
 	componentDidUpdate() {
-		if(this.state.addresses && this.state.addresses != this.props.addresses) {
+		if (this.state.addresses && this.state.addresses != this.props.addresses) {
 			this.setState({addresses: this.props.addresses});
 		}
 	}
@@ -27,10 +28,28 @@ class OrdersForm extends Component {
 		event.preventDefault();
 
 		for (let i = 0; i < this.state.orderQuantity; i++) {
-			console.log(this.state.addresses[Math.floor(Math.random() * this.state.addresses.length)]);
+			const address = this.state.addresses[Math.floor(Math.random() * this.state.addresses.length)];
+			const customer = this.customer(address);
+			console.log(customer);
+
 			// this.props.createOrder();
 		}
 	};
+
+	customer(address) {
+		return {
+			"first_name": faker.name.firstName(),
+			"last_name": faker.name.lastName(),
+			"address_1": address.address1,
+			"address_2": "",
+			"city": address.city,
+			"state": address.state,
+			"postcode": address.postalCode,
+			"country": 'United States (US)',
+			"email": faker.internet.email(),
+			"phone": faker.phone.phoneNumber()
+		};
+	}
 
 	render() {
 		return (
