@@ -1,10 +1,10 @@
-import {FETCH_ORDERS, CREATE_ORDER, FETCH_ADDRESSES} from "./types";
+import {FETCH_ORDERS, CREATE_ORDER, FETCH_ADDRESSES, FETCH_PRODUCTS} from "./types";
 import axios from 'axios';
 
 axios.defaults.headers.common['X-WP-Nonce'] = FakerWooLocalizedData.nonce;
 
 /**
- * Fetch Orders.
+ * Fetch orders.
  * @returns {{type: string, payload: AxiosPromise<any>}}
  */
 export function fetchOrders() {
@@ -39,6 +39,19 @@ export function fetchAddresses() {
 
 	return {
 		type: FETCH_ADDRESSES,
+		payload: response
+	};
+}
+
+/**
+ * Fetch products.
+ * @returns {{type: string, payload: *}}
+ */
+export function fetchProducts() {
+	const response = axios.get(`${FakerWooLocalizedData.root}wc/v2/products?per_page=20&status=publish`);
+
+	return {
+		type: FETCH_PRODUCTS,
 		payload: response
 	};
 }

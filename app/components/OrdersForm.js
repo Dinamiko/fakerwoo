@@ -7,16 +7,21 @@ class OrdersForm extends Component {
 
 	state = {
 		orderQuantity: 1,
-		addresses: {}
+		addresses: {},
+		products: {}
 	};
 
 	componentDidMount() {
 		this.props.fetchAddresses();
+		this.props.fetchProducts();
 	}
 
 	componentDidUpdate() {
 		if (this.state.addresses && this.state.addresses != this.props.addresses) {
 			this.setState({addresses: this.props.addresses});
+		}
+		if (this.state.products && this.state.products != this.props.products) {
+			this.setState({products: this.props.products});
 		}
 	}
 
@@ -30,7 +35,9 @@ class OrdersForm extends Component {
 		for (let i = 0; i < this.state.orderQuantity; i++) {
 			const address = this.state.addresses[Math.floor(Math.random() * this.state.addresses.length)];
 			const customer = this.customer(address);
-			console.log(customer);
+
+			const products = this.products(this.state.products);
+			console.log(products);
 
 			// this.props.createOrder();
 		}
@@ -49,6 +56,32 @@ class OrdersForm extends Component {
 			"email": faker.internet.email(),
 			"phone": faker.phone.phoneNumber()
 		};
+	}
+
+	products(products) {
+
+		const product_ids = [];
+		products.map(product => {
+			product_ids.push(product.id);
+		});
+		this.shuffle(product_ids);
+
+		const product_quantity = Math.round(Math.random() * (product_ids.length - 1) + 1);
+
+		return product_ids.slice(0, product_quantity).map(product_id => {
+			return {
+				"product_id": product_id,
+				"quantity": Math.round(Math.random() * (2 - 1) + 1)
+			};
+		});
+	}
+
+	shuffle(a) {
+		for (let i = a.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[a[i], a[j]] = [a[j], a[i]];
+		}
+		return a;
 	}
 
 	render() {
@@ -80,7 +113,8 @@ class OrdersForm extends Component {
 
 function mapStateToProps(state) {
 	return {
-		addresses: state.addresses
+		addresses: state.addresses,
+		products: state.products
 	}
 }
 
