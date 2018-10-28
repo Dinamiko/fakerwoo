@@ -35,11 +35,19 @@ class OrdersForm extends Component {
 		for (let i = 0; i < this.state.orderQuantity; i++) {
 			const address = this.state.addresses[Math.floor(Math.random() * this.state.addresses.length)];
 			const customer = this.customer(address);
-
 			const products = this.products(this.state.products);
-			console.log(products);
 
-			// this.props.createOrder();
+			const data = {
+				"payment_method": "bacs",
+				"payment_method_title": "Direct Bank Transfer",
+				"set_paid": true,
+				"status": this.orderStatus(),
+				"billing": customer,
+				"shipping": customer,
+				"line_items": products
+			};
+
+			this.props.createOrder(data);
 		}
 	};
 
@@ -74,6 +82,11 @@ class OrdersForm extends Component {
 				"quantity": Math.round(Math.random() * (2 - 1) + 1)
 			};
 		});
+	}
+
+	orderStatus() {
+		const status = ['pending', 'processing', 'on-hold', 'completed', 'cancelled', 'refunded', 'failed'];
+		return status[Math.floor(Math.random() * status.length)];
 	}
 
 	shuffle(a) {
