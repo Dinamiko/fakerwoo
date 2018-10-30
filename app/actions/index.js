@@ -1,57 +1,81 @@
-import {FETCH_ORDERS, CREATE_ORDER, FETCH_ADDRESSES, FETCH_PRODUCTS} from "./types";
+import {FETCH_ORDERS, CREATE_ORDER, FETCH_ADDRESSES, FETCH_PRODUCTS, START, FINISH} from "./types";
 import axios from 'axios';
 
 axios.defaults.headers.common['X-WP-Nonce'] = FakerWooLocalizedData.nonce;
 
 /**
- * Fetch orders.
- * @returns {{type: string, payload: AxiosPromise<any>}}
+ * Fetch all orders.
+ * @returns {Function}
  */
 export function fetchOrders() {
-	const response = axios.get(`${FakerWooLocalizedData.root}fakerwoo/v1/orders`);
+    return async function (dispatch) {
+        dispatch({type: START});
+        const response = await axios.get(`${FakerWooLocalizedData.root}fakerwoo/v1/orders`);
 
-	return {
-		type: FETCH_ORDERS,
-		payload: response
-	};
+        dispatch({
+            type: FETCH_ORDERS,
+            payload: response
+        });
+
+        dispatch({type: FINISH});
+    }
+}
+
+export function createOrders(ordersData) {
+    return async function(dispatch) {
+
+        dispatch({type: START});
+
+        for (let i = 0; i < ordersData.length; i++) {
+            const order = await axios.post(`${FakerWooLocalizedData.root}wc/v2/orders`, ordersData[i]);
+
+            dispatch({
+                type: CREATE_ORDER,
+                payload: order
+            });
+        }
+
+        dispatch({type: FINISH});
+    }
 }
 
 /**
  * Creates an order.
  * @param data
- * @returns {{type: string, payload: AxiosPromise<any>}}
+ * @returns {Function}
  */
 export function createOrder(data) {
-	const response = axios.post(`${FakerWooLocalizedData.root}wc/v2/orders`, data);
+    return async function (dispatch) {
+        dispatch({type: START});
+        const response = await axios.post(`${FakerWooLocalizedData.root}wc/v2/orders`, data);
 
-	return {
-		type: CREATE_ORDER,
-		payload: response
-	};
+        dispatch({
+            type: CREATE_ORDER,
+            payload: response
+        });
+
+        dispatch({type: FINISH});
+    }
 }
 
-/**
- * Fetch a list of addresses.
- * @returns {{type: string, payload: AxiosPromise<any>}}
- */
 export function fetchAddresses() {
-	const response = axios.get(`${FakerWooLocalizedData.data}/addresses-us-all.min.json`);
+    return async function (dispatch) {
+        const response = await axios.get(`${FakerWooLocalizedData.data}/addresses-us-all.min.json`);
 
-	return {
-		type: FETCH_ADDRESSES,
-		payload: response
-	};
+        dispatch({
+            type: FETCH_ADDRESSES,
+            payload: response
+        });
+    }
 }
 
-/**
- * Fetch products.
- * @returns {{type: string, payload: *}}
- */
 export function fetchProducts() {
-	const response = axios.get(`${FakerWooLocalizedData.root}wc/v2/products?per_page=20&status=publish`);
+    return async function (dispatch) {
+        const response = await axios.get(`${FakerWooLocalizedData.root}wc/v2/products?per_page=20&status=publish`);
 
-	return {
-		type: FETCH_PRODUCTS,
-		payload: response
-	};
+        dispatch({
+            type: FETCH_PRODUCTS,
+            payload: response
+        });
+    }
 }
