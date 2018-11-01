@@ -1,7 +1,7 @@
 import React from 'react';
 import {mount} from 'enzyme';
 import Root from '../../Root';
-import OrdersForm from '../../components/OrdersForm';
+import OrdersForm from '../../components/Orders';
 
 let component;
 

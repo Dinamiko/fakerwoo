@@ -4,3 +4,5 @@ export const FETCH_ADDRESSES = 'fetch_addresses';
 export const FETCH_PRODUCTS = 'fetch_products';
 export const START = 'start';
 export const FINISH = 'finish';
+export const CURRENT = 'current';
+export const RESET = 'reset';

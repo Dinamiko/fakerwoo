@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Header from './Header';
-import OrdersForm from './OrdersForm';
+import Orders from './Orders';
 
 class App extends Component {
 
@@ -9,7 +9,7 @@ class App extends Component {
 			<div className="wrap">
 				<h1>FakerWoo</h1>
 				<Header/>
-				<OrdersForm/>
+				<Orders/>
 			</div>
 		);
 	}

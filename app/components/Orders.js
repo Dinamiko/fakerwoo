@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions';
 import faker from 'faker';
+import Progress from './Progress';
 
-class OrdersForm extends Component {
+class Orders extends Component {
 
     state = {
         orderQuantity: 1,
@@ -17,10 +18,10 @@ class OrdersForm extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.addresses != this.props.addresses) {
+        if (prevProps.addresses !== this.props.addresses) {
             this.setState({addresses: this.props.addresses});
         }
-        if (prevProps.products != this.props.products) {
+        if (prevProps.products !== this.props.products) {
             this.setState({products: this.props.products});
         }
     }
@@ -123,6 +124,7 @@ class OrdersForm extends Component {
                     </tbody>
                 </table>
                 <button disabled={this.props.process.processing} id="generate-orders" className="button button-primary">Generate</button>
+                <Progress current={this.props.process.current} total={this.state.orderQuantity} />
             </form>
         );
     }
@@ -136,4 +138,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, actions)(OrdersForm);
+export default connect(mapStateToProps, actions)(Orders);
