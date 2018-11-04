@@ -18,8 +18,11 @@ class Header extends Component {
 
 	render() {
 		return (
-			<div id="total-orders">
-				Orders: {this.totalOrders()}
+			<div>
+                <h1>FakerWoo</h1>
+				<div id="total-orders">
+					Orders: {this.totalOrders()}
+				</div>
 			</div>
 		);
 	}
