@@ -2,8 +2,11 @@ import React from 'react';
 import {mount} from 'enzyme';
 import Root from '../../Root';
 import App from '../../components/App';
+import Header from '../../components/Header';
+import Orders from '../../components/Orders';
 
-test('shows app title', () => {
-	const container = mount(<Root><App/></Root>);
-	expect(container.find('h1').length).toEqual(1);
+it('shows components', () => {
+	const component = mount(<Root><App/></Root>);
+	expect(component.find(Header).length).toEqual(1);
+	expect(component.find(Orders).length).toEqual(1);
 });

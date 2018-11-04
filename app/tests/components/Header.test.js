@@ -19,7 +19,7 @@ afterEach(() => {
 	moxios.uninstall();
 });
 
-test('display total orders', (done) => {
+it('shows total orders', (done) => {
 
 	const component = mount(
 		<Root>
