@@ -6,3 +6,4 @@ export const START = 'start';
 export const FINISH = 'finish';
 export const CURRENT = 'current';
 export const RESET = 'reset';
+export const ORDER_QUANTITY = 'order_quantity';

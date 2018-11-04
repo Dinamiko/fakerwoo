@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions';
 import faker from 'faker';
+import Form from './Form';
 import Progress from './Progress';
 
 class Orders extends Component {
 
     state = {
-        orderQuantity: 1,
         addresses: {},
         products: {}
     };
@@ -26,15 +26,11 @@ class Orders extends Component {
         }
     }
 
-    handleOrderQuantity = (event) => {
-        this.setState({orderQuantity: event.target.value});
-    };
-
     handleFormSubmit = (event) => {
         event.preventDefault();
 
         const ordersData = [];
-        for (let i = 0; i < this.state.orderQuantity; i++) {
+        for (let i = 0; i < this.props.form.orderQuantity; i++) {
             const address = this.state.addresses[Math.floor(Math.random() * this.state.addresses.length)];
             const customer = this.customer(address);
             const products = this.products(this.state.products);
@@ -102,30 +98,11 @@ class Orders extends Component {
     }
 
     render() {
-
         return (
-            <form onSubmit={this.handleFormSubmit}>
-                <table className="form-table">
-                    <tbody>
-                    <tr>
-                        <th scope="row">
-                            <label htmlFor="blogname">Orders</label>
-                        </th>
-                        <td>
-                            <input
-                                id="order-quantity"
-                                type="number"
-                                className="regular-text"
-                                value={this.state.orderQuantity}
-                                onChange={this.handleOrderQuantity}
-                            />
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <button disabled={this.props.process.processing} id="generate-orders" className="button button-primary">Generate</button>
-                <Progress current={this.props.process.current} total={this.state.orderQuantity} />
-            </form>
+            <div>
+                <Form submit={(event) => this.handleFormSubmit(event)}/>
+                <Progress current={this.props.process.current} total={this.props.form.orderQuantity} />
+            </div>
         );
     }
 }
@@ -134,7 +111,8 @@ function mapStateToProps(state) {
     return {
         addresses: state.addresses,
         products: state.products,
-        process: state.process
+        process: state.process,
+        form: state.form
     }
 }
 

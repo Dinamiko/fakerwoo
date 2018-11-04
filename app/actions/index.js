@@ -1,4 +1,4 @@
-import {FETCH_ORDERS, CREATE_ORDER, FETCH_ADDRESSES, FETCH_PRODUCTS, START, FINISH, CURRENT, RESET} from "./types";
+import {FETCH_ORDERS, CREATE_ORDER, FETCH_ADDRESSES, FETCH_PRODUCTS, START, FINISH, CURRENT, RESET, ORDER_QUANTITY} from "./types";
 import axios from 'axios';
 
 axios.defaults.headers.common['X-WP-Nonce'] = FakerWooLocalizedData.nonce;
@@ -22,11 +22,11 @@ export function fetchOrders() {
 }
 
 export function createOrders(ordersData) {
-    return async function(dispatch) {
+    return async function (dispatch) {
         dispatch({type: START});
 
         for (let i = 0; i < ordersData.length; i++) {
-            dispatch({type: CURRENT,  payload: i + 1});
+            dispatch({type: CURRENT, payload: i + 1});
 
             const order = await axios.post(`${FakerWooLocalizedData.root}wc/v2/orders`, ordersData[i]);
             dispatch({
@@ -59,5 +59,14 @@ export function fetchProducts() {
             type: FETCH_PRODUCTS,
             payload: response
         });
+    }
+}
+
+export function orderQuantity(orderQuantity) {
+    return function(dispatch) {
+        dispatch({
+            type: ORDER_QUANTITY,
+            payload: orderQuantity
+        })
     }
 }
