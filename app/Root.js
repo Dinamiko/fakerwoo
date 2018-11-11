@@ -6,15 +6,15 @@ import reducers from './reducers';
 
 export default ({children, initialState = {}}) => {
 
-	const store = createStore(
-		reducers,
-		initialState,
-		applyMiddleware(reduxThunk)
-	);
+    const store = createStore(
+        reducers,
+        initialState,
+        applyMiddleware(reduxThunk)
+    );
 
-	return (
-		<Provider store={store}>
-			{children}
-		</Provider>
-	);
+    return (
+        <Provider store={store}>
+            {children}
+        </Provider>
+    );
 };

@@ -1,10 +1,10 @@
-import { ORDER_QUANTITY} from "../actions/types";
+import {ORDER_QUANTITY} from '../actions/types';
 
 const initialState = {
     orderQuantity: 2
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
     switch (action.type) {
         case ORDER_QUANTITY:
             return {orderQuantity: action.payload};

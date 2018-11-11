@@ -1,4 +1,4 @@
-import {FETCH_ORDERS, CREATE_ORDER, FETCH_ADDRESSES, FETCH_PRODUCTS, START, FINISH, CURRENT, RESET, ORDER_QUANTITY} from "./types";
+import {FETCH_ORDERS, CREATE_ORDER, FETCH_ADDRESSES, FETCH_PRODUCTS, START, FINISH, CURRENT, RESET, ORDER_QUANTITY} from './types';
 import axios from 'axios';
 
 axios.defaults.headers.common['X-WP-Nonce'] = FakerWooLocalizedData.nonce;
@@ -18,7 +18,7 @@ export function fetchOrders() {
         });
 
         dispatch({type: FINISH});
-    }
+    };
 }
 
 export function createOrders(ordersData) {
@@ -37,7 +37,7 @@ export function createOrders(ordersData) {
 
         dispatch({type: FINISH});
         dispatch({type: RESET});
-    }
+    };
 }
 
 export function fetchAddresses() {
@@ -48,7 +48,7 @@ export function fetchAddresses() {
             type: FETCH_ADDRESSES,
             payload: response
         });
-    }
+    };
 }
 
 export function fetchProducts() {
@@ -59,7 +59,7 @@ export function fetchProducts() {
             type: FETCH_PRODUCTS,
             payload: response
         });
-    }
+    };
 }
 
 export function orderQuantity(orderQuantity) {
@@ -67,6 +67,6 @@ export function orderQuantity(orderQuantity) {
         dispatch({
             type: ORDER_QUANTITY,
             payload: orderQuantity
-        })
-    }
+        });
+    };
 }

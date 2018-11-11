@@ -1,4 +1,4 @@
-import {FINISH, START, CURRENT, RESET} from "../actions/types";
+import {FINISH, START, CURRENT, RESET} from '../actions/types';
 
 const initialState = {
     processing: false,

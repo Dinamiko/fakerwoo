@@ -4,5 +4,5 @@ export default (props) => {
     if (props.current === 0) {
         return null;
     }
-    return <p>Processing: {props.current} of {props.total}</p>
+    return <p>Processing: {props.current} of {props.total}</p>;
 };
